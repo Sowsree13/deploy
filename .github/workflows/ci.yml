@@ -49,6 +49,6 @@ jobs:
       - name: Deploy locally
         run: |
           # Define the local deployment directory
-          $destination = 'C:\\path\\to\\deployment\\folder'
+          $destination = 'C:\Users\Sowmyasree\Documents\deployment'
           # Copy all project files to the destination directory
           Copy-Item -Path .\* -Destination $destination -Recurse -Force
