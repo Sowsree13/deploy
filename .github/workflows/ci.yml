@@ -67,3 +67,28 @@ jobs:
         run: |
           $destination = 'C:\Users\Sowmyasree\Documents\deployment'
           Get-ChildItem -Path $destination -Recurse
+
+      - name: Deploy locally
+        shell: pwsh
+        run: |
+          $destination = 'C:\Users\Sowmyasree\Documents\deployment'
+    
+          # Ensure the destination directory exists
+          if (!(Test-Path -Path $destination)) {
+          New-Item -ItemType Directory -Path $destination
+          }
+    
+          # Clear the destination directory
+          Remove-Item -Path "$destination\*" -Recurse -Force
+
+          # Log files to be copied
+          Write-Host "Files to be copied:"
+          Get-ChildItem -Path .\* -Recurse
+
+          # Copy files to the destination
+          Copy-Item -Path .\* -Destination $destination -Recurse -Force
+    
+          # Verify copied contents
+          Write-Host "Contents of the destination directory:"
+          Get-ChildItem -Path $destination -Recurse
+
